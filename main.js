@@ -1,5 +1,10 @@
+LWX=0;
+RWX=0;
+
 NoseX=0;
 NoseY=0;
+
+distance=0;
 
 function preload(){
 
@@ -17,7 +22,10 @@ function setup(){
 
 function draw(){
 background('#00FFFF')
+
+textSize(distance)
 text('Tanu', NoseX,NoseY)
+
 }
 
 function modelLoaded(){
@@ -30,5 +38,11 @@ function gotposes(results){
 
     NoseX=results[0].pose.nose.x 
     NoseY=results[0].pose.nose.y
+
+    LWX=results[0].pose.leftWrist.x
+    RWX=results[0].pose.rightWrist.x
+    distance=Math.floor(LWX-RWX)
+    console.log(distance)
+    document.getElementById("square_sides").innerHTML="Sides Of The Square " + distance
   }
 }
